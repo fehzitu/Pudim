@@ -72,8 +72,8 @@ Structured in a modular way to ensure scalability and easy maintenance.
 
 3️⃣ Configure your bot token in config.json:
 {
-  "clientId": "BOT ID",
-  "token": "BOT TOKEN"
+    "clientId": "CLIENT ID",
+    "token": "TOKEN ID"
 }
 
 4️⃣ Start the bot:
