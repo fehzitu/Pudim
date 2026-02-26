@@ -69,7 +69,7 @@ const rest = new REST({ version: '10' }).setToken(token);
         console.log('🚀 Iniciando deploy dos comandos...\n');
 
         const data = await rest.put(
-            Routes.applicationGuildCommands(clientId, guildId),
+            Routes.applicationCommands(clientId, guildId),
             {
                 body: commands
             }

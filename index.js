@@ -5,9 +5,13 @@ const path = require('node:path');
 // discord importations
 const Discord = require('discord.js');
 const Token = require('./config.json');
-const client = new Discord.Client({
-    intents: Object.values(Discord.GatewayIntentBits),
-    partials: Object.values(Discord.Partials)
+
+// import all intents
+const { Client, GatewayIntentBits } = require('discord.js');
+
+// get all the bot intents once
+const client = new Client({
+    intents: Object.values(GatewayIntentBits)
 });
 
 // new client commands instance (BOT)
