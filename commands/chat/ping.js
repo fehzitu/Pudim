@@ -2,7 +2,7 @@ const { SlashCommandBuilder } = require('discord.js');
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('pong')
+        .setName('ping')
         .setDescription('Responde com Pong!'),
 
     async execute(interaction) {
@@ -17,7 +17,7 @@ module.exports = {
 
         // edit the main message
         await interaction.editReply(
-            `🏓 Pong!\n📡 Latência: ${latency}ms\n💓 API: ${interaction.client.ws.ping}ms`
+            `🏓 Pong!\n📡 Latência: ${latency}ms`
         );
-    },
+    }
 };

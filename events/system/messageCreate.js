@@ -11,13 +11,6 @@ module.exports = {
         const channelName = message.channel?.name ?? "Direct Message";
 
         // log
-        console.log(`
-            User: 『 ${message.author.username} 』
-            Guild & Channel: 『 ${guildName} : ${channelName} 』
-            Message: 『 ${message.content} 』
-        `);
-
-        // testing log
         console.log(`[${new Date().toLocaleTimeString()}] ${message.author.tag} -> ${guildName} #${channelName}: ${message.content}`);
     }
 };

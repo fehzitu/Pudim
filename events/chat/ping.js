@@ -9,7 +9,7 @@ module.exports = {
         const content = message.content.toLowerCase();
 
         // check if the message has "!ping"
-        if (content === '!pong') {
+        if (content === '!ping') {
             // send this message as a response
             const msg = await message.reply('🏓 Pong!');
 
@@ -19,5 +19,5 @@ module.exports = {
             // edit the main message and set the latency
             await msg.edit(`🏓 Pong!\n📡 Latência: ${latency}ms`);
         }
-    },
+    }
 };
