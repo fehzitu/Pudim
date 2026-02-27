@@ -1,18 +1,18 @@
 {
-  "name": "pudim",
+  "name": "king",
   "version": "0.0.1",
-  "description": "Pudim discord bot",
+  "description": "King discord bot",
   "keywords": [
     "bot",
     "discord"
   ],
-  "homepage": "https://github.com/fehzitu/Pudim#readme",
+  "homepage": "https://github.com/fehzitu/King-bot#readme",
   "bugs": {
-    "url": "https://github.com/fehzitu/Pudim/issues"
+    "url": "https://github.com/fehzitu/King-bot/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fehzitu/Pudim.git"
+    "url": "git+https://github.com/fehzitu/King-bot.git"
   },
   "license": "ISC",
   "author": "fehzitu",
