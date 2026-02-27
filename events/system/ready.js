@@ -10,8 +10,7 @@ module.exports = {
 
         // all the main status
         const activities = [
-            '{ https://discord.gg/PPhhJgAFRF }',
-            'Pudim melhor comunidade'
+            '{ https://discord.gg/PPhhJgAFRF }'
         ];
 
         // switch status every x seconds
