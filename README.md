@@ -1,13 +1,13 @@
-## 🍮 Pudim Bot
+## 👑 King Bot
 
-> Official bot of the **Pudim** Discord server.  
+> Official bot of the **Drakay** Discord server.  
 > Built to apply and improve JavaScript skills using Node.js and Discord.js.
 
 ---
 
 ## 📌 About The Project
 
-Pudim Bot is a fully custom Discord bot developed from scratch for the Pudim server.
+King Bot is a fully custom Discord bot developed from scratch for the Pudim server.
 
 The main goals of this project are:
 
@@ -47,7 +47,7 @@ This project focuses not only on features, but also on code quality, structure, 
 
 ## 📂 Project Structure
 ```shell
-📦 pudim-bot
+📦 king-bot
 ┣ 📂 commands
 ┃ ┗ 📂 utils
 ┣ 📂 events
@@ -81,7 +81,7 @@ Structured in a modular way to ensure scalability and easy maintenance.
 ```
 
 ## 🎯 Project Purpose
-``Pudim Bot represents``:
+``King Bot represents``:
 - **Practical JavaScript experience**
 - **Clean architecture learning**
 - **Real Discord API interaction**
