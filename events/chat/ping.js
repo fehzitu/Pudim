@@ -27,7 +27,7 @@ module.exports = {
                 iconURL: `${message.author.displayAvatarURL()}`,
                 name: `@${message.author.username}`
             })
-            .setTitle('🏓 Pong!')
+            .setTitle(data.title)
             .setThumbnail(`${message.author.displayAvatarURL()}`)
             .addFields(data.field)
             .setTimestamp()
