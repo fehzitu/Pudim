@@ -1,10 +1,9 @@
-const { SlashCommandBuilder } = require('discord.js');
+const Discord = require('discord.js');
 
 module.exports = {
-    data: new SlashCommandBuilder()
+    data: new Discord.SlashCommandBuilder()
         .setName('ping')
         .setDescription('Responde com Pong!'),
-
     async execute(interaction) {
         // set the main message to be send
         const sent = await interaction.reply({
