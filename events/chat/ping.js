@@ -36,7 +36,7 @@ module.exports = {
             });
 
         // check if the message has "!ping"
-        if (content == 'ping') {
+        if (content == 'k.ping') {
             const response = await message.reply({
                 embeds: [embed]
             });

@@ -29,6 +29,6 @@ module.exports = {
         }, 10000);
 
         // log
-        console.log(`${client.user.tag} logado com sucesso!`);
+        console.log(`👑 ${client.user.tag} logado com sucesso!`);
     }
 };

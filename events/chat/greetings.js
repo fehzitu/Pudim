@@ -12,6 +12,8 @@ module.exports = {
         let day = 'bom dia';
         let midDay = 'boa tarde';
         let night = 'boa noite';
+        
+        // responses
         let greeting = [[
             "Que manhã deliciosa para começar algo novo!",
             "O sol brilha e a vida sorri. Bom dia!",

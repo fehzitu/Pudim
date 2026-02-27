@@ -8,7 +8,7 @@ module.exports = {
 
         // check the server and channel from the message
         const guildName = message.guild?.name ?? "DM";
-        const channelName = message.channel?.name ?? "Direct Message";
+        const channelName = message.channel?.name ?? "DM";
 
         // log
         console.log(`[${new Date().toLocaleTimeString()}] ${message.author.tag} -> ${guildName} #${channelName}: ${message.content}`);

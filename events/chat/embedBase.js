@@ -35,7 +35,7 @@ module.exports = {
             });
 
         // checking the regex
-        if (content == 'embed') {
+        if (content == 'k.embed') {
             const response = await message.reply({
                 embeds: [embed]
             });
