@@ -58,6 +58,7 @@ module.exports = {
                 });
         }
 
+        // set the main message to be send
         const response = await interaction.reply({
             embeds: [embed]
         });
