@@ -77,7 +77,7 @@ Structured in a modular way to ensure scalability and easy maintenance.
 }
 
 4️⃣ Start the bot:
-- node index.js
+- npm start
 ```
 
 ## 🎯 Project Purpose
