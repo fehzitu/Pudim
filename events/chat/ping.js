@@ -1,3 +1,11 @@
+// discord implements
+const Discord = require('discord.js');
+
+// node file system
+const fs = require('fs');
+const path = require('path');
+const filePath = path.join(__dirname, 'complements/ping.json');
+
 module.exports = {
     name: 'messageCreate',
     once: false,
@@ -8,16 +16,30 @@ module.exports = {
         // catch the message content and set to lower case
         const content = message.content.toLowerCase();
 
+        // reading the file in real time
+        const rawData = fs.readFileSync(filePath, 'utf8');
+        const data = JSON.parse(rawData);
+
+        // create an embed
+        const embed = new Discord.EmbedBuilder()
+            .setColor('Random')
+            .setAuthor({
+                iconURL: `${message.author.displayAvatarURL()}`,
+                name: `@${message.author.username}`
+            })
+            .setTitle('🏓 Pong!')
+            .setThumbnail(`${message.author.displayAvatarURL()}`)
+            .addFields(data.field)
+            .setTimestamp()
+            .setFooter({
+                text: 'Atualizado'
+            });
+
         // check if the message has "!ping"
-        if (content === '!ping') {
-            // send this message as a response
-            const msg = await message.reply('🏓 Pong!');
-
-            // check the bot latency
-            const latency = msg.createdTimestamp - message.createdTimestamp;
-
-            // edit the main message and set the latency
-            await msg.edit(`🏓 Pong!\n📡 Latência: ${latency}ms`);
-        }
+        if (content == 'ping') {
+            const response = await message.reply({
+                embeds: [embed]
+            });
+        };
     }
 };
