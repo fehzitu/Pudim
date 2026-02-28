@@ -27,9 +27,12 @@ module.exports = {
                 iconURL: `${message.author.displayAvatarURL()}`,
                 name: `@${message.author.username}`
             })
-            .setTitle(data.title)
+            .setTitle('**🏓 Pong!**')
             .setThumbnail(`${message.author.displayAvatarURL()}`)
-            .addFields(data.field)
+            .addFields({
+                name: '📡 Ping',
+                value: `**${client.ws.ping}ms**`
+            })
             .setTimestamp()
             .setFooter({
                 text: 'Atualizado'

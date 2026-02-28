@@ -16,8 +16,8 @@ module.exports = {
             .setTitle('**🏓 Pong!**')
             .setThumbnail(`${interaction.user.displayAvatarURL()}`)
             .addFields({
-                name: "**Tempo de resposta da API.**",
-                value: "**100ms.**"
+                name: '📡 Ping',
+                value: `**${client.ws.ping}ms**`
             })
             .setTimestamp()
             .setFooter({
