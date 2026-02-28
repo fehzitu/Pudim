@@ -8,6 +8,7 @@ const filePath = path.join(__dirname, 'complements/embed.json');
 
 module.exports = {
     name: 'messageCreate',
+    once: false,
     async execute(message) {
         // check if an bot has send the message
         if (message.author.bot) return;
