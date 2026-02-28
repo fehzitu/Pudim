@@ -6,6 +6,9 @@ module.exports = {
         .setName('ping')
         .setDescription('Responde com Pong!'),
     async execute(interaction) {
+        // get bot info
+        const client = interaction.client;
+
         // create an embed
         const embed = new Discord.EmbedBuilder()
             .setColor('Random')
