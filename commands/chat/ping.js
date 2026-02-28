@@ -17,7 +17,7 @@ module.exports = {
                 name: `@${interaction.user.username}`
             })
             .setTitle('**🏓 Pong!**')
-            .setThumbnail(`${interaction.user.displayAvatarURL()}`)
+            .setThumbnail(`${interaction.client.user.displayAvatarURL()}`)
             .addFields({
                 name: '📡 Ping',
                 value: `**${client.ws.ping}ms**`

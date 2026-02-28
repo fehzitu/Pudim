@@ -2,27 +2,32 @@
 const Discord = require('discord.js');
 
 module.exports = {
-    data: new Discord.SlashCommandBuilder()
-        .setName('info')
-        .setDescription('Mostra informações do bot!'),
-    async execute(interaction) {
+    name: 'messageCreate',
+    once: false,
+    async execute(message) {
+        // check if an bot has send the message
+        if (message.author.bot) return;
+
         // get bot info
-        const client = interaction.client;
+        const client = message.client;
 
         // bot info
         const totalUsers = client.guilds.cache.reduce((acc, guild) => acc + guild.memberCount, 0);
         const totalChannels = client.channels.cache.size;
         const totalGuilds = client.guilds.cache.size;
 
+        // catch the message content and set to lower case
+        const content = message.content.toLowerCase();
+
         // create an embed
         const embed = new Discord.EmbedBuilder()
             .setColor('Random')
             .setAuthor({
-                iconURL: `${interaction.user.displayAvatarURL()}`,
-                name: `@${interaction.user.username}`
+                iconURL: `${message.author.displayAvatarURL()}`,
+                name: `@${message.author.username}`
             })
             .setTitle('**🤖 Bot Information**')
-            .setThumbnail(`${interaction.client.user.displayAvatarURL()}`)
+            .setThumbnail(`${message.client.user.displayAvatarURL()}`)
             .addFields({
                 name: '👑 Bot Name',
                 value: `**${client.user.tag}**`
@@ -56,9 +61,11 @@ module.exports = {
                 text: 'Atualizado'
             });
 
-        // set the main message to be send
-        const response = await interaction.reply({
-            embeds: [embed]
-        });
+        // check if the message has "k.info"
+        if (content == 'k.info') {
+            const response = await message.reply({
+                embeds: [embed]
+            });
+        };
     }
 };

@@ -1,11 +1,6 @@
 // discord implements
 const Discord = require('discord.js');
 
-// node file system
-const fs = require('fs');
-const path = require('path');
-const filePath = path.join(__dirname, 'complements/ping.json');
-
 module.exports = {
     name: 'messageCreate',
     once: false,
@@ -13,12 +8,11 @@ module.exports = {
         // check if an bot has send the message
         if (message.author.bot) return;
 
+        // get bot info
+        const client = message.client;
+
         // catch the message content and set to lower case
         const content = message.content.toLowerCase();
-
-        // reading the file in real time
-        const rawData = fs.readFileSync(filePath, 'utf8');
-        const data = JSON.parse(rawData);
 
         // create an embed
         const embed = new Discord.EmbedBuilder()
@@ -28,7 +22,7 @@ module.exports = {
                 name: `@${message.author.username}`
             })
             .setTitle('**🏓 Pong!**')
-            .setThumbnail(`${message.author.displayAvatarURL()}`)
+            .setThumbnail(`${message.client.user.displayAvatarURL()}`)
             .addFields({
                 name: '📡 Ping',
                 value: `**${client.ws.ping}ms**`
