@@ -4,7 +4,7 @@ const Discord = require('discord.js');
 // node file system
 const fs = require('fs');
 const path = require('path');
-const filePath = path.join(__dirname, 'complements/ping.json');
+const filePath = path.join(__dirname, 'complements/help.json');
 
 module.exports = {
     name: 'messageCreate',
@@ -35,8 +35,8 @@ module.exports = {
                 text: 'Atualizado'
             });
 
-        // check if the message has "k.ping"
-        if (content == 'k.ping') {
+        // check if the message has "k.ajuda"
+        if (content == 'k.ajuda') {
             const response = await message.reply({
                 embeds: [embed]
             });
