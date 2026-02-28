@@ -53,7 +53,7 @@ for (const folder of commandFolders) {
     }
 
     // log to valid commands
-    console.log(`📁${folder}: ${loadedInFolder}/${commandFiles.length} comandos válidos carregados.`);
+    console.log(`📁 ${folder}: ${loadedInFolder}/${commandFiles.length} comandos válidos carregados.`);
 }
 
 // log for ready commands
