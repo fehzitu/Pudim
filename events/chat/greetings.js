@@ -115,7 +115,7 @@ module.exports = {
         if (content == day) {
             embed.addFields(
                 {
-                    name: 'Bom dia!',
+                    name: '☀️ Bom dia!',
                     value: `${greeting[0][random]}`
                 });
             await message.reply({
@@ -124,7 +124,7 @@ module.exports = {
         } else if (content == midDay) {
             embed.addFields(
                 {
-                    name: 'Boa tarde!',
+                    name: '⭐️ Boa tarde!',
                     value: `${greeting[1][random]}`
                 });
             await message.reply({
@@ -133,7 +133,7 @@ module.exports = {
         } else if (content == night) {
             embed.addFields(
                 {
-                    name: 'Boa noite!',
+                    name: '🌙 Boa noite!',
                     value: `${greeting[2][random]}`
                 });
 
