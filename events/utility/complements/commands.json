@@ -7,7 +7,7 @@
         },
         {
             "name": "💬 **Comandos de prefixo (k.)**",
-            "value": "**k.ajuda ``Mostra ajuda sobre o bot``**\n**k.info ``Mostra informações detalhadas sobre o bot``**\n**k.ping ``Mostra o ping do bot com a API do Discord``**\n"
+            "value": "**k.historia ``Conta uma história aleatória sobre ti``**\n**k.info ``Mostra informações detalhadas sobre o bot``**\n**k.ping ``Mostra o ping do bot com a API do Discord``**\n"
         },
         {
             "name": "👤 **Comandos de marcação (@)**",

@@ -96,8 +96,8 @@ module.exports = {
             "Durma com leveza, acorde com alegria."
         ]];
 
-        // get an random item
-        let random = await Math.floor(Math.random() * 26);
+        // get an random number between 0 & the number of itens on greetings
+        let random = await Math.floor(Math.random() * greeting.length);
 
         // set an embed
         const embed = new Discord.EmbedBuilder()
@@ -118,6 +118,7 @@ module.exports = {
                     name: '☀️ Bom dia!',
                     value: `${greeting[0][random]}`
                 });
+
             await message.reply({
                 embeds: [embed]
             });
@@ -127,6 +128,7 @@ module.exports = {
                     name: '⭐️ Boa tarde!',
                     value: `${greeting[1][random]}`
                 });
+
             await message.reply({
                 embeds: [embed]
             });
@@ -138,7 +140,7 @@ module.exports = {
                 });
 
             // set the response
-            const response = await message.reply({
+            await message.reply({
                 embeds: [embed]
             });
         };
