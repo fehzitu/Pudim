@@ -26,32 +26,12 @@ module.exports = {
             .setTitle('**🤖 Bot Information**')
             .setThumbnail(`${message.client.user.displayAvatarURL()}`)
             .addFields({
-                name: '👑 Bot Name',
-                value: `**${message.client.user.tag}**`
+                name: `👑 Nome e Id: **${message.client.user.tag}** | **${message.client.user.id}**`,
+                value: `⏳ Uptime: **${Math.floor(message.client.uptime / 1000)} seconds**\n📡 Ping: **${message.client.ws.ping}ms**`
             },
                 {
-                    name: '🆔 Bot ID',
-                    value: `**${message.client.user.id}**`
-                },
-                {
-                    name: '📡 Ping',
-                    value: `**${message.client.ws.ping}ms**`
-                },
-                {
-                    name: '🏠 Servers',
-                    value: `**${totalGuilds}**`
-                },
-                {
-                    name: '👥 Users',
-                    value: `**${totalUsers}**`
-                },
-                {
-                    name: '📚 Channels',
-                    value: `**${totalChannels}**`
-                },
-                {
-                    name: '⏳ Uptime',
-                    value: `**${Math.floor(message.client.uptime / 1000)} seconds**`
+                    name: `🏠 Servers: **${totalGuilds}**`,
+                    value: `📚 Canais: **${totalChannels}**\n👥 Usuários: **${totalUsers}**`
                 })
             .setTimestamp()
             .setFooter({
