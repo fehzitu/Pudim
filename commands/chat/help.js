@@ -23,7 +23,6 @@ module.exports = {
                 name: `@${interaction.user.username}`
             })
             .setTitle(data.title)
-            .setThumbnail(`${interaction.client.user.displayAvatarURL()}`)
             .addFields(data.field)
             .setTimestamp()
             .setFooter({

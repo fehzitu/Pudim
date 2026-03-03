@@ -28,7 +28,6 @@ module.exports = {
                 name: `@${message.author.username}`
             })
             .setTitle(data.title)
-            .setThumbnail(`${message.client.user.displayAvatarURL()}`)
             .addFields(data.field)
             .setTimestamp()
             .setFooter({
