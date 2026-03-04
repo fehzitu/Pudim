@@ -3,11 +3,15 @@
     "field": [
         {
             "name": "🤖 **Comandos de barra (/)**",
-            "value": "**/ajuda __``Receba ajuda sobre nosso sistema``__**\n**/info __``Recebe informações sobre mim (bot)``__**\n"
+            "value": "**/ajuda __``Receba ajuda sobre nosso sistema``__** ❓\n**/info __``Recebe informações sobre mim (bot)``__** 📍\n"
         },
         {
             "name": "💬 **Comandos de prefixo (k.)**",
-            "value": "**k.cartao __``Mostra um cartão aleatório para o usuário marcado``__**\n**k.historia __``Conta uma história aleatória sobre ti``__**\n**k.info __``Mostra informações detalhadas sobre o bot``__**\n**k.ping __``Mostra o ping do bot com a API do Discord``__**\n"
+            "value": "**k.cartao __``Mostra um cartão aleatório para o usuário marcado``__** 💳\n**k.historia __``Conta uma história aleatória sobre ti``__** 🗣️\n**k.info __``Mostra informações detalhadas sobre o bot``__** 🗃️\n**k.ping __``Mostra o ping do bot com a API do Discord``__** ⏳\n"
+        },
+        {
+            "name": "🚩 **Comandos de prefixo com marcação (k.[comando] @<usuário>)**",
+            "value": "**k.abracar __``Da um abraço no usuário marcado``__** 👐\n**k.tapa __``Da um tapa no usuário marcado``__** 🤚\n**k.beijar __``Beija no usuário marcado``__** 💋\n"
         }
     ]
 }
