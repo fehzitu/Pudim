@@ -7,14 +7,11 @@ const path = require('path');
 const filePath = path.join(__dirname, 'complements/rules.json');
 
 module.exports = {
-    name: 'messageCreate',
-    once: false,
+    // "name" will receive the value that will be the chat message that the bot captures as a command
+    name: 'regras',
     async execute(message) {
         // check if an bot has send the message
         if (message.author.bot) return;
-
-        // catch the message content and set to lower case
-        const content = message.content.toLowerCase();
 
         // reading the file in real time
         const rawData = fs.readFileSync(filePath, 'utf8');
@@ -33,11 +30,9 @@ module.exports = {
                 text: 'Atualizado'
             });
 
-        // check if the message has "k.regras"
-        if (content == 'k.regras') {
-            const response = await message.reply({
-                embeds: [embed]
-            });
-        };
+        // response
+        await message.reply({
+            embeds: [embed]
+        });
     }
 };
