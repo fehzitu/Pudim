@@ -4,11 +4,11 @@ const Discord = require('discord.js');
 // node file system
 const fs = require('fs');
 const path = require('path');
-const filePath = path.join(__dirname, 'complements/cardMeme.json');
+const filePath = path.join(__dirname, 'complements/kiss.json');
 
 module.exports = {
     // "name" will receive the value that will be the chat message that the bot captures as a command
-    name: 'cartao',
+    name: 'beijar',
     async execute(message) {
         // check if an bot has send the message
         if (message.author.bot) return;
@@ -23,8 +23,15 @@ module.exports = {
         const rawData = fs.readFileSync(filePath, 'utf8');
         const data = JSON.parse(rawData);
 
-        // get a random number
-        let random = await Math.floor(Math.random() * data.success.field.length);
+        // variable to save the api img url
+        let imgUrl = '';
+
+        // function to get the api img
+        const getImg = async (args) => {
+            // get the image from an external API
+            const fetchApi = await fetch(`https://api.waifu.pics/sfw/${args}`);
+            imgUrl = await fetchApi.json();
+        };
 
         // create an errorEmbed
         const errorEmbed = new Discord.EmbedBuilder()
@@ -46,7 +53,6 @@ module.exports = {
                 iconURL: `${message.author.displayAvatarURL()}`,
                 name: `@${message.author.username}`
             })
-            .addFields(data.success.field[random])
             .setTimestamp()
             .setFooter({
                 text: 'Atualizado'
@@ -54,11 +60,22 @@ module.exports = {
 
         // set the embed to a mentioned user
         if (content.length == 2 && firstMentionedUser) {
-            // set the title of embed with mentioned username
-            successEmbed.setTitle(`${data.success.title} __**${firstMentionedUser.username}**__`);
+            // check if the user use kiss on him self
+            if (message.author.id == firstMentionedUser.id) {
+                // call the img function
+                await getImg('cringe');
 
-            // set mentioned user photo to embed thumbnail
-            successEmbed.setThumbnail(`${firstMentionedUser.displayAvatarURL()}`);
+                // set the title of embed with mentioned username
+                successEmbed.setDescription(`🤔 **<@${message.author.id}> se ama ao ponto de se beijar?**❓`);
+                await successEmbed.setImage(imgUrl.url);
+            } else {
+                // call the img function
+                await getImg('kiss');
+
+                // set the title of embed with mentioned username
+                successEmbed.setDescription(`😳 **<@${message.author.id}> beijou <@${firstMentionedUser.id}>**❗`);
+                await successEmbed.setImage(imgUrl.url);
+            };
 
             // response
             return await message.reply({

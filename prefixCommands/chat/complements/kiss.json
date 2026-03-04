@@ -1,0 +1,12 @@
+{
+    "error": [
+        {
+            "name": "🔴 **Uso incorreto do comando**!",
+            "value": "(Faltou alguma marcação ou mais de 1 usuário foi marcado!)"
+        },
+        {
+            "name": "🟢 **Uso correto**:",
+            "value": "k.beijar @[usuário]"
+        }
+    ]
+}
