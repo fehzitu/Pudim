@@ -2,14 +2,11 @@
 const Discord = require('discord.js');
 
 module.exports = {
-    name: 'messageCreate',
-    once: false,
+    // "name" will receive the value that will be the chat message that the bot captures as a command
+    name: 'historia',
     async execute(message) {
         // check if an bot has send the message
         if (message.author.bot) return;
-
-        // catch the message content and set to lower case
-        const content = message.content.toLowerCase();
 
         // histories to use
         const histories = [
@@ -50,11 +47,9 @@ module.exports = {
                 text: 'Atualizado'
             });
 
-        // check if the message has "k.historia"
-        if (content == 'k.historia') {
-            const response = await message.reply({
-                embeds: [embed]
-            });
-        };
+        // response
+        await message.reply({
+            embeds: [embed]
+        });
     }
 };
