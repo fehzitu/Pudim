@@ -3,7 +3,7 @@ const Discord = require('discord.js');
 
 module.exports = {
     // "name" will receive the value that will be the chat message that the bot captures as a command
-    name: 'regras',
+    name: 'info',
     async execute(message) {
         // check if an bot has send the message
         if (message.author.bot) return;
