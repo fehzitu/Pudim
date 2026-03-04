@@ -2,8 +2,8 @@
 const Discord = require('discord.js');
 
 module.exports = {
-    name: 'messageCreate',
-    once: false,
+    // "name" will receive the value that will be the chat message that the bot captures as a command
+    name: 'regras',
     async execute(message) {
         // check if an bot has send the message
         if (message.author.bot) return;
@@ -12,9 +12,6 @@ module.exports = {
         const totalUsers = message.client.guilds.cache.reduce((acc, guild) => acc + guild.memberCount, 0);
         const totalChannels = message.client.channels.cache.size;
         const totalGuilds = message.client.guilds.cache.size;
-
-        // catch the message content and set to lower case
-        const content = message.content.toLowerCase();
 
         // create an embed
         const embed = new Discord.EmbedBuilder()
@@ -38,11 +35,9 @@ module.exports = {
                 text: 'Atualizado'
             });
 
-        // check if the message has "k.info"
-        if (content == 'k.info') {
-            const response = await message.reply({
-                embeds: [embed]
-            });
-        };
+        // response
+        await message.reply({
+            embeds: [embed]
+        });
     }
 };
