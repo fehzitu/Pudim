@@ -2,14 +2,11 @@
 const Discord = require('discord.js');
 
 module.exports = {
-    name: 'messageCreate',
-    once: false,
+    // "name" will receive the value that will be the chat message that the bot captures as a command
+    name: 'ping',
     async execute(message) {
         // check if an bot has send the message
         if (message.author.bot) return;
-
-        // catch the message content and set to lower case
-        const content = message.content.toLowerCase();
 
         // create an embed
         const embed = new Discord.EmbedBuilder()
@@ -29,11 +26,9 @@ module.exports = {
                 text: 'Atualizado'
             });
 
-        // check if the message has "k.ping"
-        if (content == 'k.ping') {
-            const response = await message.reply({
-                embeds: [embed]
-            });
-        };
+        // response
+        await message.reply({
+            embeds: [embed]
+        });
     }
 };
