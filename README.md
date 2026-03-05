@@ -30,9 +30,9 @@ This project focuses not only on features, but also on code quality, structure, 
 - [x] Basic command handler
 - [x] Event handler system
 - [x] Automatic logs
+- [x] Fun commands
 - [ ] Moderation system
 - [ ] Economy system
-- [ ] Fun commands
 - [ ] Slash commands
 - [ ] Leveling system
 - [ ] Database integration (future)
