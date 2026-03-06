@@ -13,6 +13,13 @@ module.exports = {
             return;
         };
 
+        // check the server and channel from the message
+        const guildName = interaction.guild?.name ?? "DM";
+        const channelName = interaction.channel?.name ?? "DM";
+
+        // log
+        console.log(`[${new Date().toLocaleTimeString()}] @${interaction.user.tag} ${guildName} ${channelName}: /${command.data.name} [${command.data.description}]`);
+
         // try execute command and handle every error
         try {
             await command.execute(interaction);
