@@ -77,6 +77,12 @@ Structured in a modular way to ensure scalability and easy maintenance.
 - npm start
 ```
 
+## ⚙️ One line command
+
+```js
+git clone https://github.com/fehzitu/King-bot && cd King-bot && yes | npm install && npm start
+```
+
 ## 🎯 Project Purpose
 ``King Bot represents``:
 - **Practical JavaScript experience**
