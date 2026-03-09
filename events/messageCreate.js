@@ -17,8 +17,10 @@ module.exports = {
         // check if an bot send the message
         if (message.author.bot) return;
 
-        // get user id
+        // get user name, id &, tag
+        const userName = message.author.username;
         const userId = message.author.id;
+        const userTag = message.author.tag;
 
         // load the database file
         const users = loadUser(filePath);
@@ -27,8 +29,8 @@ module.exports = {
         if (!users[userId]) {
             // create a new user data on the file
             users[userId] = {
-                id: message.author.id,
-                name: message.author.username,
+                id: userId,
+                name: userName,
                 money: 100,
                 createdAt: new Date().toISOString(),
                 level: 0,
@@ -39,7 +41,7 @@ module.exports = {
             saveUser(filePath, users);
 
             // log
-            console.log(`🏆 Novo perfil criado para ${message.author.tag}`);
+            console.log(`🏆 Novo perfil criado para ${userTag}`);
         };
 
         // check the server and channel from the message
