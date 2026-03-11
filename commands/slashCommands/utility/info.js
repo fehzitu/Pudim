@@ -1,8 +1,9 @@
 // discord implements
 const Discord = require('discord.js');
+const { SlashCommandBuilder } = require('@discordjs/builders');
 
 module.exports = {
-    data: new Discord.SlashCommandBuilder()
+    data: new SlashCommandBuilder()
         .setName('info')
         .setDescription('Mostra informações do bot!'),
     async execute(interaction) {

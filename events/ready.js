@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 
 module.exports = {
-    name: Discord.Events.ClientReady,
+    name: 'ready',
     once: true,
     execute(client) {
         // count
@@ -19,12 +19,11 @@ module.exports = {
 
         // switch status every x seconds
         setInterval(() => {
-            client.user.setActivity(activities[i], {
-                type: Discord.ActivityType.Playing
-            });
-
-            i = (i + 1) % activities.length;
-
+        	client.user.setActivity(activities[i], {
+        		type: "PLAYING"
+        	});
+        	
+        	i = (i + 1) % activities.length;
         }, 10000);
 
         // log

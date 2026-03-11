@@ -75,7 +75,7 @@ const rest = new REST({ version: '10' }).setToken(token);
 
 		// defines a route to save the comands in the bot database
         const data = await rest.put(
-            Routes.applicationCommands(clientId, guildId),
+            Routes.applicationCommands(clientId),
             {
                 body: commands
             }

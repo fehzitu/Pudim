@@ -9,12 +9,12 @@ const Token = require('./config.json');
 // import all intents
 const {
 	Client,
-	GatewayIntentBits
+	Intents
 } = require('discord.js');
 
 // get all the bot intents once
 const client = new Client({
-	intents: Object.values(GatewayIntentBits)
+    intents: Object.values(Intents.FLAGS)
 });
 
 // new client commands instance (BOT)

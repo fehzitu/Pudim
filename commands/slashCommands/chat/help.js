@@ -1,5 +1,6 @@
 // discord implements
 const Discord = require('discord.js');
+const { SlashCommandBuilder } = require('@discordjs/builders');
 
 // node file system
 const fs = require('fs');
@@ -7,7 +8,7 @@ const path = require('path');
 const filePath = path.join(__dirname, 'complements/help.json');
 
 module.exports = {
-    data: new Discord.SlashCommandBuilder()
+    data: new SlashCommandBuilder()
         .setName('ajuda')
         .setDescription('Recebe ajuda sobre nosso sistema!'),
     async execute(interaction) {

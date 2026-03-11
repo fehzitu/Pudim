@@ -12,7 +12,7 @@ const { loadUser } = require(path.join(__dirname, '../functions/loadUser.js'));
 const { saveUser } = require(path.join(__dirname, '../functions/saveUser.js'));
 
 module.exports = {
-    name: Discord.Events.MessageCreate,
+    name: 'messageCreate',
     async execute(message) {
         // check if an bot send the message
         if (message.author.bot) return;
@@ -45,8 +45,8 @@ module.exports = {
         };
 
         // check the server and channel from the message
-        const guildName = message.guild?.name ?? "DM";
-        const channelName = message.channel?.name ?? "DM";
+        const guildName = message.guild ? message.guild.name : "DM";
+        const channelName = message.channel.type === "DM" ? "DM" : message.channel.name;
 
         // log
         console.log(`[${new Date().toLocaleTimeString()}] @${message.author.tag} ${guildName} ${channelName}: ${message.content}`);

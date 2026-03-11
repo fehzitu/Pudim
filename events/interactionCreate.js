@@ -12,10 +12,10 @@ const { loadUser } = require(path.join(__dirname, '../functions/loadUser.js'));
 const { saveUser } = require(path.join(__dirname, '../functions/saveUser.js'));
 
 module.exports = {
-    name: Discord.Events.InteractionCreate,
+    name: 'interactionCreate',
     async execute(interaction) {
         // check if the command is an chat interaction
-        if (!interaction.isChatInputCommand()) return;
+        if (!interaction.isCommand()) return;
 
         // get the command name
         const command = interaction.client.slashCommands.get(interaction.commandName);
@@ -66,12 +66,12 @@ module.exports = {
             // check if it has already been answered / deferred
             if (interaction.replied || interaction.deferred) {
                 await interaction.followUp({
-                    content: '[🔴] Comando já respondido ou adiado [🔴]', flags: Discord.MessageFlags.Ephemeral
+                    content: '[🔴] Comando já respondido ou adiado [🔴]', ephemeral: true
                 });
             } else {
                 // check if it not has already been answered / deferred
                 await interaction.reply({
-                    content: '[🔴] Nosso sistema demorou muito pra responde ou adiar a resposta [🔴]', flags: Discord.MessageFlags.Ephemeral
+                    content: '[🔴] Nosso sistema demorou muito pra responde ou adiar a resposta [🔴]', ephemeral: true
                 });
             };
         };
