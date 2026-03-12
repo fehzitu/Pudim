@@ -17,10 +17,10 @@ module.exports = {
         const embed = new Discord.MessageEmbed()
             .setColor('RANDOM')
             .setTitle('👥 **Novo membro!**')
-            .setDescription(`📡 **Bem-vindo ou bem-vinda ${member} ao servidor!**`)
+            .setDescription(`📡 Salve **${member}**, tudo bom?`)
             .addFields({
-            	name: '🛡 **Tag:**',
-            	value: `👥: **${member.user.tag} (${member.id})**`
+            	name: `🛡 Tag: ${member.user.tag}`,
+            	value: `👥 **Id:** ${member.id}`
             })
             .setThumbnail(member.user.displayAvatarURL())
             .setTimestamp()
