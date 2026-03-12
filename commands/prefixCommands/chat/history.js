@@ -11,7 +11,7 @@ module.exports = {
         // get the message content splitted and in lower case
         const content = message.content.toLowerCase().split(' ');
         
-        // get the first mentioned user id in string (without <@ >)
+        // set the user to a mentioned (if we have)
         const user = message.mentions.users.first() || message.author;
         
         // histories to use
