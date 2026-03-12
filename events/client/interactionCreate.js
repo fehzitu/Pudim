@@ -8,8 +8,8 @@ const path = require('path');
 const filePath = path.join(__dirname, '../../users.json');
 
 // importint all custom functions
-const { loadUser } = require(path.join(__dirname, '../../functions/loadUser.js'));
-const { saveUser } = require(path.join(__dirname, '../../functions/saveUser.js'));
+const { loadJson } = require(path.join(__dirname, '../../functions/loadJson.js'));
+const { saveJson } = require(path.join(__dirname, '../../functions/saveJson.js'));
 
 module.exports = {
     name: 'interactionCreate',
@@ -30,7 +30,7 @@ module.exports = {
         const userTag = interaction.user.tag;
 
         // load the database file
-        const users = loadUser(filePath);
+        const users = loadJson(filePath);
 
         // check if the users have a profile
         if (!users[userId]) {
@@ -45,7 +45,7 @@ module.exports = {
             };
 
             // save the data into a file
-            saveUser(filePath, users);
+            saveJson(filePath, users);
 
             // log
             console.log(`🏆 Novo perfil criado para ${userTag}`);
