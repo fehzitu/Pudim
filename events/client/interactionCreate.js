@@ -8,117 +8,104 @@ const path = require('path');
 const filePath = path.join(__dirname, '../../users.json');
 
 // importing custom functions
-const {
-	loadJson
-} = require(path.join(__dirname, '../../functions/loadJson.js'));
-const {
-	saveJson
-} = require(path.join(__dirname, '../../functions/saveJson.js'));
-const {
-	checkLevelUp
-} = require('../../functions/levelSystem.js');
+const { saveJson } = require(path.join(__dirname, '../../functions/saveJson.js'));
+const { checkLevelUp } = require('../../functions/levelSystem.js');
 
 module.exports = {
-	name: 'interactionCreate',
-	async execute(interaction) {
-		// check if the interaction is a slash command
-		if (!interaction.isCommand()) return;
+    name: 'interactionCreate',
+    async execute(interaction) {
 
-		// get the command
-		const command = interaction.client.slashCommands.get(interaction.commandName);
+        // check if the interaction is a slash command
+        if (!interaction.isCommand()) return;
 
-		if (!command) {
-			console.error(`[🔴] Command not found: "${interaction.commandName}"`);
-			return;
-		};
+        // get the command
+        const command = interaction.client.slashCommands.get(interaction.commandName);
 
-		// get user id and tag
-		const userId = interaction.user.id;
-		const userTag = interaction.user.tag;
+        if (!command) {
+            console.error(`[🔴] Command not found: "${interaction.commandName}"`);
+            return;
+        };
 
-		// load users database once
-		const users = interaction.client.usersData;
+        // get user id and tag
+        const userId = interaction.user.id;
+        const userTag = interaction.user.tag;
 
-		// check if the user has a profile
-		if (!users[userId]) {
-			// create new profile
-			users[userId] = {
-				profileCreatedAt: new Date().toISOString(),
-				rpg: {
-					money: 100,
-					level: 0,
-					xp: 0,
-					multiplier: 0.25
-				},
-				stats: {
-					messages: 0,
-					commands: 0
-				},
-				cooldowns: {
-					xp: 0
-				}
-			};
+        // load users database
+        const users = interaction.client.usersData;
 
-			// save database
-			saveJson(filePath, users);
+        // create profile if not exists
+        if (!users[userId]) {
+            users[userId] = {
+                profileCreatedAt: new Date().toISOString(),
+                rpg: {
+                    money: 100,
+                    level: 0,
+                    xp: 0,
+                    multiplier: 0.25
+                },
+                stats: {
+                    messages: 0,
+                    commands: 0
+                },
+                cooldowns: {
+                    xp: 0
+                }
+            };
 
-			// log
-			console.log(`🏆 New profile created for ${userTag}`);
-		};
+            await saveJson(filePath, users);
 
-		// get user profile
-		const profile = users[userId];
+            console.log(`🏆 New profile created for ${userTag}`);
+        };
 
-		// xp system
-		const xpGain = 5;
-		profile.rpg.xp += xpGain;
+        // get profile
+        const profile = users[userId];
 
-		// check xp level
-		const result = checkLevelUp(profile);
-		if (result.leveledUp) {
+        // increase command counter
+        profile.stats.commands++;
 
-			const levelMsg = `🎉 ${interaction.user} reached **level ${result.level}**!`;
+        // log command execution
+        const guildName = interaction.guild ? interaction.guild.name : "DM";
+        const channelName = interaction.guild ? interaction.channel.name : "DM";
 
-			// ephemeral response
-			if (interaction.replied || interaction.deferred) {
-				await interaction.followUp({
-					content: levelMsg
-				});
-			} else {
-				await interaction.reply({
-					content: levelMsg
-				});
-			};
-		};
+        console.log(
+            `[${new Date().toLocaleTimeString()}] @${userTag} ${guildName} ${channelName}: /${command.data.name}`
+        );
 
-		// increase command counter
-		profile.stats.commands++;
+        try {
+            // execute command
+            await command.execute(interaction);
 
-		// log command execution
-		const guildName = interaction.guild ? interaction.guild.name: "DM";
-		const channelName = interaction.guild ? interaction.channel.name: "DM";
-		console.log(
-			`[${new Date().toLocaleTimeString()}] @${userTag} ${guildName} ${channelName}: /${command.data.name}`
-		);
+            // xp system
+            const xpGain = 5;
+            profile.rpg.xp += xpGain;
 
-		// execute command
-		try {
-			await command.execute(interaction);
-		} catch (error) {
-			console.error(error);
+            const result = checkLevelUp(profile);
 
-			// check if interaction already replied or deferred
-			if (interaction.replied || interaction.deferred) {
-				await interaction.followUp({
-					content: '[🔴] Command already replied or deferred [🔴]',
-					ephemeral: true
-				});
-			} else {
-				await interaction.reply({
-					content: '[🔴] Command took too long to respond or defer [🔴]',
-					ephemeral: true
-				});
-			};
-		}
-	}
+            // level up message
+            if (result.leveledUp) {
+
+                const levelMsg = `🎉 ${interaction.user} reached **level ${result.level}**!`;
+
+                if (interaction.replied || interaction.deferred) {
+                    await interaction.followUp({ content: levelMsg });
+                } else {
+                    await interaction.reply({ content: levelMsg });
+                };
+            };
+        } catch (error) {
+            console.error(error);
+
+            if (interaction.replied || interaction.deferred) {
+                await interaction.followUp({
+                    content: '[🔴] Command execution error [🔴]',
+                    ephemeral: true
+                });
+            } else {
+                await interaction.reply({
+                    content: '[🔴] Command execution error [🔴]',
+                    ephemeral: true
+                });
+            };
+        };
+    }
 };

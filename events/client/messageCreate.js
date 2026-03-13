@@ -8,7 +8,6 @@ const path = require('path');
 const filePath = path.join(__dirname, '../../users.json');
 
 // importing custom functions
-const { loadJson } = require(path.join(__dirname, '../../functions/loadJson.js'));
 const { saveJson } = require(path.join(__dirname, '../../functions/saveJson.js'));
 const { checkLevelUp } = require('../../functions/levelSystem.js');
 
