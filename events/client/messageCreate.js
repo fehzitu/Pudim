@@ -7,70 +7,97 @@ const path = require('path');
 // database json file
 const filePath = path.join(__dirname, '../../users.json');
 
-// importint all custom functions
+// importing custom functions
 const { loadJson } = require(path.join(__dirname, '../../functions/loadJson.js'));
 const { saveJson } = require(path.join(__dirname, '../../functions/saveJson.js'));
 
-// load users once
+// load users database once
 const users = loadJson(filePath, {});
 
 module.exports = {
     name: 'messageCreate',
     async execute(message) {
-        // check if an bot send the message
+        // ignore bot messages
         if (message.author.bot) return;
 
-        // get user name, id &, tag
-        const userName = message.author.username;
+        // get user id and tag
         const userId = message.author.id;
         const userTag = message.author.tag;
 
-        // check if the users have a profile
+        // check if the user has a profile
         if (!users[userId]) {
-            // create a new user data on the file
+            // create new profile
             users[userId] = {
-                id: userId,
-                name: userName,
-                createdAt: new Date().toISOString(),
+                profileCreatedAt: new Date().toISOString(),
                 rpg: {
-                	money: 100,
-                	level: 0,
-                	xp: 0,
-                	multiplier: 0.25,
-                	xpToNextLevel: 25
+                    money: 100,
+                    level: 0,
+                    xp: 0,
+                    multiplier: 0.25
+                },
+                stats: {
+                    messages: 0,
+                    commands: 0
+                },
+                cooldowns: {
+                    xp: 0
                 }
             };
 
-            // save the data into a file
+            // save database
             saveJson(filePath, users);
 
             // log
-            console.log(`🏆 Novo perfil criado para ${userTag}`);
+            console.log(`🏆 New profile created for ${userTag}`);
         };
 
-        // check the server and channel from the message
-        const guildName = message.guild ? message.guild.name : "DM";
-        const channelName = message.channel.type === "DM" ? "DM" : message.channel.name;
+        // get user profile
+        const profile = users[userId];
 
-        // log
-        console.log(`[${new Date().toLocaleTimeString()}] @${message.author.tag} ${guildName} ${channelName}: ${message.content}`);
+        // increase message counter
+        profile.stats.messages++;
+
+        // XP system with cooldown (30 seconds)
+        const now = Date.now();
+
+        if (now - profile.cooldowns.xp > 30000) {
+
+            // random xp between 5 and 10
+            const xpGain = Math.floor(Math.random() * 6) + 5;
+
+            profile.rpg.xp += xpGain;
+
+            // update cooldown
+            profile.cooldowns.xp = now;
+        };
+
+        // log message info
+        const guildName = message.guild ? message.guild.name : "DM";
+        const channelName = message.guild ? message.channel.name : "DM";
+
+        console.log(`[${new Date().toLocaleTimeString()}] @${userTag} ${guildName} ${channelName}: ${message.content}`);
 
         // commands prefix
         const prefix = "k.";
 
-        // set lower case
+        // set message content to lower case
         const content = message.content.toLowerCase();
+
+        // check if message starts with prefix
         if (!content.startsWith(prefix)) return;
 
-        // get args from message content
+        // get args from message
         const args = content.slice(prefix.length).trim().split(/ +/);
         const commandName = args.shift();
 
-        // get the command by the name
+        // get command from collection
         const command = message.client.prefixCommands.get(commandName);
         if (!command) return;
 
-        // handle error
+        // increase command counter
+        profile.stats.commands++;
+
+        // execute command
         try {
             await command.execute(message, args);
         } catch (error) {

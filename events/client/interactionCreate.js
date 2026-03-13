@@ -7,73 +7,89 @@ const path = require('path');
 // database json file
 const filePath = path.join(__dirname, '../../users.json');
 
-// importint all custom functions
+// importing custom functions
 const { loadJson } = require(path.join(__dirname, '../../functions/loadJson.js'));
 const { saveJson } = require(path.join(__dirname, '../../functions/saveJson.js'));
 
-// load users once
+// load users database once
 const users = loadJson(filePath, {});
 
 module.exports = {
     name: 'interactionCreate',
     async execute(interaction) {
-        // check if the command is an chat interaction
+        // check if the interaction is a slash command
         if (!interaction.isCommand()) return;
 
-        // get the command name
+        // get the command
         const command = interaction.client.slashCommands.get(interaction.commandName);
+
         if (!command) {
-            console.error(`[🔴] Não foi encontrado um comando com o nome: "${interaction.commandName}"! [🔴]`);
+            console.error(`[🔴] Command not found: "${interaction.commandName}"`);
             return;
         };
-        
-        // get user name, id &, tag
-        const userName = interaction.user.username;
+
+        // get user id and tag
         const userId = interaction.user.id;
         const userTag = interaction.user.tag;
 
-        // check if the users have a profile
+        // check if the user has a profile
         if (!users[userId]) {
-            // create a new user data on the file
+            // create new profile
             users[userId] = {
-                id: userId,
-                name: userName,
-                money: 100,
-                createdAt: new Date().toISOString(),
-                level: 0,
-                xp: 0
+                profileCreatedAt: new Date().toISOString(),
+                rpg: {
+                    money: 100,
+                    level: 0,
+                    xp: 0,
+                    multiplier: 0.25
+                },
+                stats: {
+                    messages: 0,
+                    commands: 0
+                },
+                cooldowns: {
+                    xp: 0
+                }
             };
 
-            // save the data into a file
+            // save database
             saveJson(filePath, users);
 
             // log
-            console.log(`🏆 Novo perfil criado para ${userTag}`);
+            console.log(`🏆 New profile created for ${userTag}`);
         };
 
-        // check the server and channel from the message
-        const guildName = interaction.guild?.name ?? "DM";
-        const channelName = interaction.channel?.name ?? "DM";
+        // get user profile
+        const profile = users[userId];
 
-        // log
-        console.log(`[${new Date().toLocaleTimeString()}] @${interaction.user.tag} ${guildName} ${channelName}: /${command.data.name} [${command.data.description}]`);
+        // increase command counter
+        profile.stats.commands++;
 
-        // try execute command and handle every error
+        // log command execution
+        const guildName = interaction.guild ? interaction.guild.name : "DM";
+        const channelName = interaction.guild ? interaction.channel.name : "DM";
+        console.log(
+            `[${new Date().toLocaleTimeString()}] @${userTag} ${guildName} ${channelName}: /${command.data.name}`
+        );
+
+        // execute command
         try {
             await command.execute(interaction);
         } catch (error) {
             console.error(error);
-            // check if it has already been answered / deferred
+
+            // check if interaction already replied or deferred
             if (interaction.replied || interaction.deferred) {
                 await interaction.followUp({
-                    content: '[🔴] Comando já respondido ou adiado [🔴]', ephemeral: true
+                    content: '[🔴] Command already replied or deferred [🔴]',
+                    ephemeral: true
                 });
             } else {
-                // check if it not has already been answered / deferred
                 await interaction.reply({
-                    content: '[🔴] Nosso sistema demorou muito pra responde ou adiar a resposta [🔴]', ephemeral: true
+                    content: '[🔴] Command took too long to respond or defer [🔴]',
+                    ephemeral: true
                 });
             };
-        };
+        }
     }
 };
