@@ -34,9 +34,9 @@ This project focuses not only on features, but also on code quality, structure, 
 - [x] Fun commands
 - [x] Automatic logs
 - [ ] Persistent log
+- [x] Leveling system
 - [ ] Moderation system
 - [ ] Economy system
-- [ ] Leveling system
 - [ ] Database integration (future)
 
 ## 📂 Project Structure
@@ -46,9 +46,11 @@ This project focuses not only on features, but also on code quality, structure, 
 ┃ ┣ 📂 slashCommands (/ commands here)
 ┃ ┗ 📂 prefixCommands (prefix commands here)
 ┣ 📂 events
-┃ ┣ 📜 interactionCreate.js
-┃ ┣ 📜 messageCreate.js
-┃ ┗ 📜 ready.js
+┃ ┣ 📂 client
+┃ ┃ ┣ 📜 interactionCreate.js
+┃ ┃ ┣ 📜 messageCreate.js
+┃ ┃ ┗ 📜 ready.js
+┃ ┗ 📂 guild (guild events)
 ┣ 📜 users.json (all users profile data, will be created automatically)
 ┣ 📜 deploy-commands.js
 ┣ 📜 index.js
