@@ -131,7 +131,7 @@ setInterval(async () => {
         console.log("💾 Autosaving users database...");
         await saveJson(filePath, client.usersData);
     } catch (err) {
-        console.error("Autosave error:", err);
+        console.error("👾 Autosave error:", err);
     }
 }, 60000);
 
